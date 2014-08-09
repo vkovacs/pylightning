@@ -7,10 +7,13 @@ alex.setpos(0, 300)
 alex.left(-90)
 alex.pendown()
 
-for i in range(0,30):
-    rand=random.randint(-60,60)
-    alex.left(rand)
-    distance=random.randint(0,40)
-    alex.forward(distance)
-    alex.left(-rand)
+def lightning(mixdirection, maxdistance, fragment) :
+    for i in range(0,fragment):
+        rand=random.randint(-mixdirection,mixdirection)
+        alex.left(rand)
+        distance=random.randint(0,maxdistance)
+        alex.forward(distance)
+        alex.left(-rand)
+        
+lightning(40,40,40)
 turtle.done()
