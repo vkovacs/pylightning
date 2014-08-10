@@ -3,6 +3,7 @@ import random
 import math
 import time
 screen = turtle.Screen()
+screen.screensize(1024,768)
 alex = turtle.Turtle()
 
 
