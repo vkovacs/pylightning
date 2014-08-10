@@ -18,6 +18,7 @@ RIGHT_BRANCH_MOD=4
 def drawLightning(step, distance, side) :
     if step> 0:
         for i in range(0,MAX_RANGE):
+            alex.pensize(step*2)
             alex.forward(distance)
             #randomAngle=random.randint(-MAX_ROTATE_ANGLE,MAX_ROTATE_ANGLE)
             
