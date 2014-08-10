@@ -1,6 +1,7 @@
 import turtle
 import random
 import math
+import time
 screen = turtle.Screen()
 alex = turtle.Turtle()
 
@@ -9,8 +10,9 @@ MAX_ROTATE_ANGLE=90
 MAX_DISTANCE=40
 MAX_RANGE=20
 
-LEFT_BRANCH_ODDS=10
-RIGHT_BRANCH_ODDS=5
+TRUNK_BRANCH_ODDS=30
+LEFT_BRANCH_ODDS=30
+RIGHT_BRANCH_ODDS=30
 
 
 r=147
@@ -67,6 +69,14 @@ def drawLightning(step, distance, side) :
             
             pos=alex.position()
            
+            
+            #trunk branch
+            rand = random.randint(0,TRUNK_BRANCH_ODDS);
+            if rand==0:
+                drawLightning(step-1, math.floor(distance/2), 0)
+            
+            #right branch    
+            
             #left branch
             rand = random.randint(0,LEFT_BRANCH_ODDS);
             #if i % LEFT_BRANCH_MOD == 0:
@@ -90,6 +100,7 @@ def drawLightning(step, distance, side) :
 for i in range(1,10):
     init()
     generateRGB()
-    drawLightning(2, MAX_DISTANCE, 0)
+    drawLightning(3, MAX_DISTANCE, 0)
+    time.sleep(1)
     alex.clear()
 turtle.done()
