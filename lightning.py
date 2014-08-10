@@ -1,12 +1,16 @@
 import turtle
 import random
-wn = turtle.Screen()
+import math
+screen = turtle.Screen()
 alex = turtle.Turtle()
 alex.penup()
 alex.setpos(0, 300)
 alex.pendown()
 alex.right(90)
 alex.speed(0)
+
+screen.bgcolor("black")
+screen.colormode(255)
 
 MAX_ROTATE_ANGLE=90
 MAX_DISTANCE=40
@@ -15,10 +19,19 @@ MAX_RANGE=20
 LEFT_BRANCH_MOD=6
 RIGHT_BRANCH_MOD=4
 
+r=147
+g=49
+b=147
+
+
+
 def drawLightning(step, distance, side) :
     if step> 0:
         for i in range(0,MAX_RANGE):
             alex.pensize(step*2)
+            
+            alex.pencolor(r+10*(10-step),g+10*(5-step),b+10*(10-step))
+            #alex.pencolor("purple")
             alex.forward(distance)
             #randomAngle=random.randint(-MAX_ROTATE_ANGLE,MAX_ROTATE_ANGLE)
             
