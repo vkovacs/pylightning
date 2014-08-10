@@ -19,6 +19,9 @@ r=147
 g=49
 b=147
 
+def clearScreen() :
+    screen.bgcolor("black")
+    screen.colormode(255)
 
 def init():
     alex.penup()
@@ -30,8 +33,7 @@ def init():
     alex.right(90)
     alex.speed(0)
 
-    screen.bgcolor("black")
-    screen.colormode(255)
+    
     
 def generateRGB():
     global r
@@ -64,43 +66,39 @@ def drawLightning(step, distance, side) :
                 #270-360
                 randomAngle= random.randint(290,340)
             
-            #alex.left(randomAngle)
             alex.setheading(randomAngle)
             
+            #recursion does not store turtle position so we we have to do it manually..
             pos=alex.position()
            
             
-            #trunk branch
+            #trunk type branch
             rand = random.randint(0,TRUNK_BRANCH_ODDS);
             if rand==0:
-                drawLightning(step-1, math.floor(distance/2), 0)
+                drawLightning(step-1, math.floor(distance/2), 0)   
             
-            #right branch    
-            
-            #left branch
+            #left type branch
             rand = random.randint(0,LEFT_BRANCH_ODDS);
-            #if i % LEFT_BRANCH_MOD == 0:
             if rand==0:
-                #alex.setheading(180)
                 drawLightning(step-1, math.floor(distance/2), 1)
-                #alex.setheading(270)
             
-            #right branch    
+            #right type branch    
             rand = random.randint(0,RIGHT_BRANCH_ODDS);
             if rand==0:
-            #if i % RIGHT_BRANCH_MOD == 0:
-                #alex.setheading(180)
                 drawLightning(step-1, math.floor(distance/2), 2)
-                #alex.setheading(270)
-                
+            
+            # ..and later we should restore the position
             alex.penup()
             alex.setposition(pos) 
             alex.pendown()
     
-for i in range(1,10):
+for i in range(0,9):
+    if i % 2==0:
+        clearScreen()
+        time.sleep(1)
+        alex.clear()
     init()
     generateRGB()
     drawLightning(3, MAX_DISTANCE, 0)
-    time.sleep(1)
-    alex.clear()
+  
 turtle.done()
