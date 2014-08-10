@@ -3,34 +3,48 @@ import random
 import math
 screen = turtle.Screen()
 alex = turtle.Turtle()
-alex.penup()
-alex.setpos(0, 300)
-alex.pendown()
-alex.right(90)
-alex.speed(0)
 
-screen.bgcolor("black")
-screen.colormode(255)
 
 MAX_ROTATE_ANGLE=90
 MAX_DISTANCE=40
 MAX_RANGE=20
 
-LEFT_BRANCH_MOD=6
-RIGHT_BRANCH_MOD=4
+LEFT_BRANCH_ODDS=10
+RIGHT_BRANCH_ODDS=5
+
 
 r=147
 g=49
 b=147
 
 
+def init():
+    alex.penup()
+    x=random.randint(-300,300)
+    y=random.randint(300,400)
+    
+    alex.setpos(x, y)
+    alex.pendown()
+    alex.right(90)
+    alex.speed(0)
+
+    screen.bgcolor("black")
+    screen.colormode(255)
+    
+def generateRGB():
+    global r
+    r=random.randint(0,255)
+    global g
+    g=random.randint(0,255)
+    global b
+    b=random.randint(0,255)
 
 def drawLightning(step, distance, side) :
     if step> 0:
         for i in range(0,MAX_RANGE):
             alex.pensize(step*2)
             
-            alex.pencolor(r+10*(10-step),g+10*(5-step),b+10*(10-step))
+            alex.pencolor(r,g,b)
             #alex.pencolor("purple")
             alex.forward(distance)
             #randomAngle=random.randint(-MAX_ROTATE_ANGLE,MAX_ROTATE_ANGLE)
@@ -52,21 +66,30 @@ def drawLightning(step, distance, side) :
             alex.setheading(randomAngle)
             
             pos=alex.position()
-            heading=alex.heading()
-            if i % LEFT_BRANCH_MOD == 0:
+           
+            #left branch
+            rand = random.randint(0,LEFT_BRANCH_ODDS);
+            #if i % LEFT_BRANCH_MOD == 0:
+            if rand==0:
                 #alex.setheading(180)
-                drawLightning(step-1, distance/2, 1)
+                drawLightning(step-1, math.floor(distance/2), 1)
                 #alex.setheading(270)
-                
-            if i % RIGHT_BRANCH_MOD == 0:
+            
+            #right branch    
+            rand = random.randint(0,RIGHT_BRANCH_ODDS);
+            if rand==0:
+            #if i % RIGHT_BRANCH_MOD == 0:
                 #alex.setheading(180)
-                drawLightning(step-1, distance/2, 2)
+                drawLightning(step-1, math.floor(distance/2), 2)
                 #alex.setheading(270)
                 
             alex.penup()
             alex.setposition(pos) 
             alex.pendown()
     
-
-drawLightning(2, MAX_DISTANCE, 0)
+for i in range(1,10):
+    init()
+    generateRGB()
+    drawLightning(2, MAX_DISTANCE, 0)
+    alex.clear()
 turtle.done()
