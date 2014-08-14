@@ -50,9 +50,7 @@ def drawLightning(step, distance, side) :
             alex.pensize(step*2)
             
             alex.pencolor(r,g,b)
-            #alex.pencolor("purple")
             alex.forward(distance)
-            #randomAngle=random.randint(-MAX_ROTATE_ANGLE,MAX_ROTATE_ANGLE)
             
             #trunk
             if side==0 :
@@ -93,11 +91,14 @@ def drawLightning(step, distance, side) :
             alex.setposition(pos) 
             alex.pendown()
     
-for i in range(0,9):
+i=-1
+while True:
+    i+=1
     if i % 2==0:
         clearScreen()
         time.sleep(1)
         alex.clear()
+        i=0
     init()
     generateRGB()
     drawLightning(3, MAX_DISTANCE, 0)
